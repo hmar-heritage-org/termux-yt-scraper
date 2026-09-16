@@ -1,0 +1,15 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Scraped raw and processed data (Keep local & private)
+raw/
+processed/
+*.jsonl
+.state_*.json
+*.json
+
+# Android / Termux temporary files
+.cache/
+*.log

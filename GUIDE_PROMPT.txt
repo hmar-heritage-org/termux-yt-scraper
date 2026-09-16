@@ -1,0 +1,45 @@
+===================================================================
+HMAR HERITAGE FOUNDATION — YOUTUBE COMMENT SCRAPER (TERMUX GUIDE)
+===================================================================
+
+[For Volunteers / Mobile Contributors]
+
+Follow these 3 easy steps to collect real-world Hmar comments for our language project using Termux on your phone:
+
+-------------------------------------------------------------------
+STEP 1: INSTALL TERMUX & PREPARE
+-------------------------------------------------------------------
+1. Open Termux on your phone.
+2. Copy and paste this single command into Termux, then press Enter:
+
+pkg update -y && pkg install -y python ffmpeg git termux-api && pip install --upgrade yt-dlp && termux-setup-storage
+
+(Note: When a popup asks to allow Storage Permission, tap "Allow").
+
+-------------------------------------------------------------------
+STEP 2: CLONE & RUN THE SCRAPER
+-------------------------------------------------------------------
+Run:
+git clone https://github.com/hmar-heritage-org/termux-yt-scraper.git
+cd termux-yt-scraper
+python termux_yt_scraper.py
+
+When prompted, paste the YouTube Channel URL, for example:
+https://www.youtube.com/@lalsanglieninbuonofficial4410
+
+The script will:
+• Automatically prevent your phone from sleeping (screen can turn off).
+• Download all comments into your Downloads folder.
+• Resume automatically if you pause it.
+
+-------------------------------------------------------------------
+STEP 3: SEND THE FILE VIA WHATSAPP
+-------------------------------------------------------------------
+When scraping finishes (or whenever you pause it):
+1. Open WhatsApp and open our chat/group.
+2. Tap the '+' or Paperclip icon -> Document.
+3. Open your phone's "Downloads" folder -> "Hmar-YT-Comments".
+4. Select the .jsonl file (e.g. B_Lalsanglien_Inbuon_Official_raw.jsonl) and send it!
+
+That's it! Thank you for helping build our open digital Hmar language assets!
+===================================================================
