@@ -23,11 +23,11 @@ echo "[4/4] Requesting phone storage access..."
 termux-setup-storage || true
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-chmod +x "$SCRIPT_DIR/termux_yt_scraper.py"
+chmod +x "$SCRIPT_DIR/main.py"
 
 # Create global shortcut command 'hmar-yt-scrape'
 if [ -d "$PREFIX/bin" ]; then
-    ln -sf "$SCRIPT_DIR/termux_yt_scraper.py" "$PREFIX/bin/hmar-yt-scrape"
+    ln -sf "$SCRIPT_DIR/main.py" "$PREFIX/bin/hmar-yt-scrape"
     echo ""
     echo "====================================================="
     echo " [✓] Installation Complete!"
@@ -37,5 +37,5 @@ if [ -d "$PREFIX/bin" ]; then
     echo ""
     echo "====================================================="
 else
-    echo "Run with: python3 $SCRIPT_DIR/termux_yt_scraper.py"
+    echo "Run with: python3 $SCRIPT_DIR/main.py"
 fi

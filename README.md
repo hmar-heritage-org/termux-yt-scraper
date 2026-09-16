@@ -1,30 +1,18 @@
-# Hmar Heritage Foundation — YouTube Comment Scraper (Termux & Linux)
+# termux-yt-scraper
 
-A lightweight, resilient CLI tool to scrape raw conversational comments from YouTube channels, playlists, or videos. Designed to collect real-world contemporary Hmar and Zo language text for NLP corpora and language models.
+A simple script to scrape YouTube comments from channels, playlists, or videos. Built for Termux on Android and Linux to help collect modern, conversational Hmar text for language research.
 
----
+## How it works
 
-## Key Features
+- Enter any YouTube channel, playlist, or video link.
+- The script grabs comments and writes them to a JSONL file.
+- On Android, it saves files straight to `Downloads/Hmar-YT-Comments/` so you can attach and send them over WhatsApp without digging through system folders.
+- It keeps your phone awake while running (`termux-wake-lock`) so you can turn the screen off safely.
+- If you stop the script, running it again picks up where it left off.
 
-1. **Direct Android WhatsApp Integration:**
-   * On Android Termux, scrapes directly into `/sdcard/Download/Hmar-YT-Comments/`.
-   * Volunteers can immediately open WhatsApp $\rightarrow$ Attach $\rightarrow$ Document $\rightarrow$ Downloads and share the `.jsonl` file.
-2. **Android Wake Lock (`termux-wake-lock`):**
-   * Automatically keeps Android awake so the phone screen can turn off safely without pausing or killing the scraper.
-3. **Resilient Auto-Resume:**
-   * Keeps track of scraped video IDs in `.state_[channel].json`. 
-   * If paused, interrupted, or stopped, re-running automatically resumes where it left off.
-4. **Fault-Tolerant:**
-   * Automatically skips videos with disabled comments, private videos, or deleted content.
-   * Flushes comments to disk after every single video.
-5. **No API Keys Needed:**
-   * Operates via `yt-dlp` headless scraping with zero quota restrictions.
+## Android (Termux) setup
 
----
-
-## Quick Setup on Android Termux
-
-Copy and paste this into Termux:
+1. Install dependencies and grant storage access:
 
 ```bash
 pkg update -y && pkg install -y git python ffmpeg termux-api
@@ -32,42 +20,47 @@ pip install --upgrade yt-dlp
 termux-setup-storage
 ```
 
-Clone the repository and run:
+2. Clone and run:
 
 ```bash
 git clone https://github.com/hmar-heritage-org/termux-yt-scraper.git
 cd termux-yt-scraper
-python termux_yt_scraper.py
+python main.py
 ```
 
-*(Or run `bash install.sh` to get the instant `hmar-yt-scrape` command).*
+You can also run `bash install.sh` to add `hmar-yt-scrape` as a shortcut command in Termux.
 
----
+3. Sharing the output:
+Once the scrape finishes or you pause it, open WhatsApp, go to Document, navigate to `Downloads/Hmar-YT-Comments/`, and send the `.jsonl` file.
 
-## Running on Linux / PC
+## Running on Linux or PC
 
 ```bash
 pip install yt-dlp
-python3 termux_yt_scraper.py
+python3 main.py
 ```
 
-Outputs will be saved in `./raw/[channel_name]_raw.jsonl`.
+Files are saved in `./raw/`.
 
----
+For scraping a single channel directly with a hardcoded script, you can also run:
 
-## Raw Data Schema (JSONL)
+```bash
+python3 channel.py
+```
 
-Each line in the `.jsonl` file is a complete JSON object:
+## Output format
+
+Each comment is saved as one JSON line in `[channel_name]_raw.jsonl`:
 
 ```json
 {
   "video_id": "I1sUNM-9EZY",
-  "video_title": "LALPA INPAK HI LUNGAWINA A NIH...",
-  "channel": "B. Lalsanglien Inbuon Official",
+  "video_title": "Sample Song Title",
+  "channel": "Channel Name",
   "comment_id": "Ugx...",
-  "author": "@user123",
+  "author": "@username",
   "author_id": "UC...",
-  "text": "Nitin veltam ka ngai, athu hin ka lugril laimu tak hi athem nasa...",
+  "text": "Ka lungril laimu tak hi athem nasa...",
   "likes": 14,
   "timestamp": 1690000000,
   "time_text": "1 year ago",
